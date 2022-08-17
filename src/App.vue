@@ -1,31 +1,35 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+
+// import HelloWorld from './components/HelloWorld.vue'
+import FloatLabel from './components/FloatLabel.vue'
 </script>
 
-<template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+<template> 
+
+  <float-label :label="'This is label text'" :on="true">
+    <input id="justin-id" type="text" placeholder="This is placeholder text">
+  </float-label>
+
+  <float-label :on="true" label="This has no placeholder">
+    <input type="text">
+  </float-label>
+
+  <float-label :on="true">
+    <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="This is a text area"></textarea>
+  </float-label>
+
+<float-label>
+  <select name="justins-select" id="justins-select">
+    <option value="" disabled="disabled" selected="selected">Select a number</option>
+    <option value="1">one</option>
+    <option value="2">two</option>
+    <option value="3">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+  </select>
+</float-label>
+
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
