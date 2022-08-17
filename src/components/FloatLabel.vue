@@ -1,5 +1,5 @@
 <template>
-    <div class="float-label" :class="floatLabelClasses" ref="root">
+    <div class="float-label" :class="{'float-label--differs' : labelDiffers, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : forceFloated}" ref="root">
         <slot />
         <label class="float-label__label" :for="formElemId">{{ labelText }}</label>
     </div>
@@ -16,40 +16,31 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     let formElem = ref({})
     let formElemId = ref('')
     let formElemType = ref('')
+
     const props = defineProps({
         label: {type: String, default: ''},
-        on: {type: Boolean},
+        fixed: {type: Boolean},
         onFocus: {type: Boolean, default: false}
     })
-    const labelDiffers = computed(()=>{
-        console.log({
-            'label differs' : true,
-            'labelText.value' : labelText.value,
-            'placeholderText.value' : placeholderText.value
-        });
-        return labelText.value !== placeholderText.value
-    })
-    const floatLabelClasses = computed(()=>{
-        return {
-            'float-label--differs' : labelDiffers,
-            'float-label--on-focus' : props.onFocus,
-            }
-    })
+
     const labelComputed = computed(()=>{
         return props.label
     })
+    const labelDiffers = computed(()=>{
+        return labelText.value !== placeholderText.value
+    })
     const forceFloated = computed(()=>{
         let float = false
-        if(props.on !== null || props.on !== 'undefined') {
-            float = props.on
+        if(props.fixed !== null || props.fixed !== 'undefined') {
+            float = props.fixed
         } else {
             // float = 
         }
         return float
     })
     const getLabelText = () => {
-        console.log(labelComputed);
-        labelText.value = labelComputed ? props.label : placeholderText.value
+        console.log(labelComputed.value);
+        labelText.value = labelComputed.value ? props.label : placeholderText.value
     }
     const getFormElemId = () => {
         return formElem.value.getAttribute('id')

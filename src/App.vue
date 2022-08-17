@@ -8,15 +8,15 @@ import FloatLabel from './components/FloatLabel.vue'
 
 <template> 
 
-  <float-label :label="'This is label text'" :on="true">
+  <float-label :label="'This is label text'" :fixed="true">
     <input id="justin-id" type="text" placeholder="This is placeholder text">
   </float-label>
 
-  <float-label :on="true" label="This has no placeholder">
+  <float-label label="This has no placeholder">
     <input type="text">
   </float-label>
 
-  <float-label :on="true">
+  <float-label>
     <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="This is a text area"></textarea>
   </float-label>
 
