@@ -6,7 +6,7 @@
   "author" : "Justin Moreland",
   "license": "MIT",
   "files": [
-    "dist",
+    "dist"
   ],
   "main": "./dist/vue3-float-label.umd.cjs",
   "module": "./dist/vue3-float-label.js",
