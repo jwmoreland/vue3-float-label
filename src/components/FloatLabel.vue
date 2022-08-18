@@ -1,5 +1,5 @@
 <template>
-    <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFixed}" ref="root">
+    <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFloated}" ref="root">
         <slot></slot>
         <label class="float-label__label" :for="formElemId">{{ labelText }}</label>
     </div>
@@ -21,7 +21,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
 
     const props = defineProps({
         label: {type: String, default: ''},
-        fixed: {type: Boolean},
+        float: {type: Boolean},
         onFocus: {type: Boolean, default: false}
     })
 
@@ -31,16 +31,14 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     const shouldFade = computed(()=>{
         return placeholderText.value && labelText.value !== placeholderText.value
     })
-    const isFixed = computed(()=>{
-        let fixed = false
-        console.log({'props.fixed' : props.fixed});
-        if( props.fixed ) {
-            fixed = props.fixed
+    const isFloated = computed(()=>{
+        let float = false
+        if( props.float ) {
+            float = props.float
         } else {
-            fixed = formElemHasContent.value
+            float = formElemHasContent.value
         }
-        console.log({'fixed' : fixed});
-        return fixed
+        return float
     })
     const getLabelText = () => {
         labelText.value = labelComputed.value ? props.label : placeholderText.value
@@ -73,13 +71,13 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     }
     // Watch for form element input
     const watchForFormChanges = () => {
-        formElem.value.addEventListener('input', updateIsFixedVar)
+        formElem.value.addEventListener('input', updateIsFloatedVar)
     }
-    const updateIsFixedVar = (e) => {
+    const updateIsFloatedVar = (e) => {
         formElemHasContent.value = e.target.value.length > 0 ? true : false
     }
     const destroyWatchers = () => {
-        formElem.value.removeEventListener('input', updateIsFixedVar)
+        formElem.value.removeEventListener('input', updateIsFloatedVar)
     }
 
     // Watchers
