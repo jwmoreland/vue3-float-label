@@ -1,12 +1,11 @@
 <template>
-    <div class="float-label" :class="{'float-label--differs' : labelDiffers, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : forceFloated}" ref="root">
+    <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFixed}" ref="root">
         <slot />
         <label class="float-label__label" :for="formElemId">{{ labelText }}</label>
     </div>
 </template>
 
 <script setup>
-    import { createCallExpression } from '@vue/compiler-core';
 import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
 
     let root = ref(null)
@@ -16,6 +15,9 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     let formElem = ref({})
     let formElemId = ref('')
     let formElemType = ref('')
+    let formElemHasContent = ref(false)
+    let isValidFormElem = ref(false)
+    const compatibleFloatElemsQuery = '[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select'
 
     const props = defineProps({
         label: {type: String, default: ''},
@@ -26,20 +28,21 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     const labelComputed = computed(()=>{
         return props.label
     })
-    const labelDiffers = computed(()=>{
-        return labelText.value !== placeholderText.value
+    const shouldFade = computed(()=>{
+        return placeholderText.value && labelText.value !== placeholderText.value
     })
-    const forceFloated = computed(()=>{
-        let float = false
-        if(props.fixed !== null || props.fixed !== 'undefined') {
-            float = props.fixed
+    const isFixed = computed(()=>{
+        let fixed = false
+        console.log({'props.fixed' : props.fixed});
+        if( props.fixed ) {
+            fixed = props.fixed
         } else {
-            // float = 
+            fixed = formElemHasContent.value
         }
-        return float
+        console.log({'fixed' : fixed});
+        return fixed
     })
     const getLabelText = () => {
-        console.log(labelComputed.value);
         labelText.value = labelComputed.value ? props.label : placeholderText.value
     }
     const getFormElemId = () => {
@@ -68,22 +71,40 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
             formElem.value.id = formElemId.value
         }
     }
+    // Watch for form element input
+    const watchForFormChanges = () => {
+        formElem.value.addEventListener('input', updateIsFixedVar)
+    }
+    const updateIsFixedVar = (e) => {
+        formElemHasContent.value = e.target.value.length > 0 ? true : false
+    }
+    const destroyWatchers = () => {
+        formElem.value.removeEventListener('input', updateIsFixedVar)
+    }
 
-
+    // Watchers
     watch(labelComputed, (newVal, oldVal)=>{
         getLabelText()
     })
     
     onMounted(() => {
-        formElem.value = root.value.querySelector('input, textarea, select')
-        formElemId.value = getFormElemId()
-        formElemType.value = formElem.value ? formElem.value.tagName.toLowerCase() : ''
-        placeholderText.value = getPlaceholderValue()
-        setMatchingIds()
+        formElem.value = root.value.querySelector(compatibleFloatElemsQuery)
+        isValidFormElem.value = formElem.value ? true : false;
+        if( isValidFormElem.value ) {
+            formElemId.value = getFormElemId()
+            formElemType.value = formElem.value ? formElem.value.tagName.toLowerCase() : ''
+            placeholderText.value = getPlaceholderValue()
+            setMatchingIds()
+            setTimeout(() => {
+                watchForFormChanges()
+            }, 200);
+        } else {
+            placeholderText.value = ''
+        }
         getLabelText()
     })
     onBeforeUnmount(() => {
-
+        destroyWatchers()
     })
     
 </script>

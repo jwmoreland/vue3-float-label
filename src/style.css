@@ -1,5 +1,5 @@
 :root {
-    --vfl-y-padding: 12px;
+    --vfl-y-padding: 16px;
     --vfl-x-padding: 16px;
 
     font-size: 16px;
@@ -41,31 +41,41 @@ body > * {
     width: 100%;
 }
 .float-label__label {
-    /* border: 1px solid transparent; */
+    transition: all .2s;
+    opacity: 1;
+    left: calc(var(--vfl-x-padding) -2px);
 }
-.float-label input[type=text], .float-label textarea, .float-label select {
+.float-label--fade-anim .float-label__label {
+    opacity: 0;
+}
+.float-label input, .float-label textarea, .float-label select {
     padding: var(--vfl-y-padding) var(--vfl-x-padding);
     width: 100%;
     font-size: 16px;
     line-height: 20px;
 }
 
-.float-label input[type=text]::placeholder, .float-label input[type=textarea]::placeholder, .float-label select::placeholder, .float-label label {
+.float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label label {
     position: absolute;
-    top: var(--vfl-y-padding); left: var(--vfl-x-padding);
+    top: var(--vfl-y-padding); 
+    left: var(--vfl-x-padding);
     display: block;
     line-height: 24px;
     font-weight: 400;
 }
 .float-label input::placeholder, .float-label textarea::placeholder {
-    color: purple
+    color: transparent;
+    transition: opacity 0.2s;
 }
-.float-label label {
-    transition: all .2s ease-out;
+.float-label--fade-anim input::placeholder, .float-label--fade-anim textarea::placeholder {
+    color: purple;
 }
 .float-label--fixed .float-label__label, .float-label--on-focus input:focus ~ .float-label__label {
     transform-origin: top left;
-    transform: scale(.85) translateY(-15px);
+    transform: scale(.85) translateY(-18px);
     opacity: 1;
     pointer-events: none;
+}
+.float-label--fixed input::placeholder, .float-label--fixed textarea::placeholder {
+    opacity: 0;
 }
