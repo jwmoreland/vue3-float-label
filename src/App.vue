@@ -75,6 +75,8 @@ import FloatLabel from './components/FloatLabel.vue'
 .float-label input, .float-label textarea, .float-label select {
     padding: var(--vfl-y-padding) var(--vfl-x-padding);
     width: 100%;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label label {

@@ -1,8 +1,18 @@
 {
-  "name": "vue-float-labels",
+  "name": "vue3-float-labels",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/vue3-float-labels.umd.cjs",
+  "module": "./dist/vue3-float-labels.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-float-labels.js",
+      "require": "./dist/vue3-float-labels.umd.cjs"
+    },
+    "./dist/style.css" : "./dist/style.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
