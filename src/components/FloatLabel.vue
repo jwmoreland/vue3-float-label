@@ -1,6 +1,6 @@
 <template>
     <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFixed}" ref="root">
-        <slot />
+        <slot></slot>
         <label class="float-label__label" :for="formElemId">{{ labelText }}</label>
     </div>
 </template>
