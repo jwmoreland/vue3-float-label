@@ -1,38 +1,6 @@
 :root {
     --vfl-y-padding: 16px;
     --vfl-x-padding: 16px;
-
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 400;
-
-    color: #213547;
-    background-color: #ffffff;
-    background-color: #FFF;
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    box-sizing: border-box;
-}
-body >*:not(#app) {
-    width: 960px
-}
-body,
-body *:not(html):not(style):not(br):not(tr):not(code) {
-    font-family: "Source Sans Pro", sans-serif;
-    box-sizing: border-box;
-}
-body {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
-}
-body > * {
-    width: 400px;
 }
 .float-label {
     display: flex;
@@ -68,7 +36,7 @@ body > * {
     transition: opacity 0.2s;
 }
 .float-label--fade-anim input::placeholder, .float-label--fade-anim textarea::placeholder {
-    color: purple;
+    color: gray;
 }
 .float-label--fixed .float-label__label, .float-label--on-focus input:focus ~ .float-label__label {
     transform-origin: top left;
