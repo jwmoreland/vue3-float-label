@@ -23,7 +23,7 @@
     line-height: 20px;
 }
 
-.float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label label {
+.float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label__label {
     position: absolute;
     top: var(--vfl-y-padding); 
     left: var(--vfl-x-padding);
@@ -46,4 +46,7 @@
 }
 .float-label--fixed input::placeholder, .float-label--fixed textarea::placeholder {
     opacity: 0;
+}
+.float-label--no-click {
+    pointer-events: none;
 }

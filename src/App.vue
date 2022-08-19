@@ -3,11 +3,18 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 
 // import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue';
 import FloatLabel from './components/FloatLabel.vue'
+
+let dynamicText = ref('This is dynamic input text');
+
 </script>
 
 <template> 
 
+  <float-label>
+    <input type="text" v-model="dynamicText" placeholder="Pre-filled Text">
+  </float-label>
   <float-label :label="'This is label text'">
     <input id="justin-id" type="text" placeholder="This is placeholder text">
   </float-label>
@@ -20,9 +27,9 @@ import FloatLabel from './components/FloatLabel.vue'
     <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="This is a text area"></textarea>
   </float-label>
 
-<float-label>
+<float-label :label="'Select a big number'">
   <select name="justins-select" id="justins-select">
-    <option value="" disabled="disabled" selected>Select a number</option>
+    <option value="" disabled="disabled" selected="">Select a number</option>
     <option value="1">one</option>
     <option value="2">two</option>
     <option value="3">three</option>

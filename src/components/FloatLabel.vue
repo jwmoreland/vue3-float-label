@@ -1,7 +1,8 @@
 <template>
     <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFloated}" ref="root">
         <slot></slot>
-        <label class="float-label__label" :for="formElemId">{{ labelText }}</label>
+        <div v-if="formElemType === ''" class="float-label__label float-label--no-click">{{ labelText}}</div>
+        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId">{{ labelText }}</label>
     </div>
 </template>
 
@@ -17,6 +18,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     let formElemType = ref('')
     let formElemHasContent = ref(false)
     let isValidFormElem = ref(false)
+    
     const compatibleFloatElemsQuery = '[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select'
 
     const props = defineProps({
@@ -29,14 +31,19 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         return props.label
     })
     const shouldFade = computed(()=>{
-        return placeholderText.value && labelText.value !== placeholderText.value
+        // Set to fade if it is NOT a <select>, or placeholder has value AND it's not equal to label
+        if(formElemType.value === 'select') {
+            return true
+        } else {
+            return placeholderText.value && labelText.value !== placeholderText.value
+        }
     })
     const isFloated = computed(()=>{
         let float = false
         if( props.float ) {
-            float = props.float
+            float = true
         } else {
-            float = formElemHasContent.value
+            float = formElemHasContent.value && formElemHasContent.value !== '0'
         }
         return float
     })
@@ -56,7 +63,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
             case 'textarea':
                 return formElem.value.placeholder
             case 'select':
-                let option = formElem.value.querySelector('option[disabled][selected]')
+                let option = formElem.value.querySelector('option:disabled')
                 let text = option ? option.innerHTML : ''
                 return text
             default:
@@ -71,13 +78,22 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     }
     // Watch for form element input
     const watchForFormChanges = () => {
-        formElem.value.addEventListener('input', updateIsFloatedVar)
-    }
-    const updateIsFloatedVar = (e) => {
-        formElemHasContent.value = e.target.value.length > 0 ? true : false
+        if(formElemType.value === 'select') {
+            formElem.value.addEventListener('change', updateIsFloatedOnChange)
+        } else {
+            formElem.value.addEventListener('input', updateIsFloatedOnChange)
+        }
     }
     const destroyWatchers = () => {
-        formElem.value.removeEventListener('input', updateIsFloatedVar)
+        if(formElemType === '') {
+        } else if(formElemType.value === 'select') {
+            formElem.value.removeEventListener('change', updateIsFloatedOnChange)
+        } else {
+            formElem.value.removeEventListener('input', updateIsFloatedOnChange)
+        }
+    }
+    const updateIsFloatedOnChange = (e) => {
+        formElemHasContent.value = e.target.value.length > 0 ? true : false
     }
 
     // Watchers
@@ -91,6 +107,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         if( isValidFormElem.value ) {
             formElemId.value = getFormElemId()
             formElemType.value = formElem.value ? formElem.value.tagName.toLowerCase() : ''
+            formElemHasContent.value = formElem.value.value ? true : false
             placeholderText.value = getPlaceholderValue()
             setMatchingIds()
             setTimeout(() => {
