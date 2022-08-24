@@ -2,7 +2,7 @@
     <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFloated}" ref="root">
         <slot></slot>
         <div v-if="formElemType === ''" class="float-label__label float-label--no-click">{{ labelText}}</div>
-        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId">{{ labelText }}</label>
+        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId"><span class="float-label__label__bg" v-if="formElemType === 'textarea'"></span> <span class="float-label__label__text">{{ labelText }}</span></label>
     </div>
 </template>
 
@@ -85,8 +85,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         }
     }
     const destroyWatchers = () => {
-        if(formElemType === '') {
-        } else if(formElemType.value === 'select') {
+        if(formElemType.value === 'select') {
             formElem.value.removeEventListener('change', updateIsFloatedOnChange)
         } else {
             formElem.value.removeEventListener('input', updateIsFloatedOnChange)
@@ -119,8 +118,9 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         getLabelText()
     })
     onBeforeUnmount(() => {
-        destroyWatchers()
+        if(isValidFormElem.value) {
+            destroyWatchers()
+        }
     })
     
 </script>
-
