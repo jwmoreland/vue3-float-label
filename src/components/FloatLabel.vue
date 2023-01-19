@@ -2,10 +2,7 @@
     <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFloated}" ref="root">
         <slot></slot>
         <div v-if="formElemType === ''" class="float-label__label float-label--no-click"><span class="float-label__label__text">{{ labelText }}</span></div>
-        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId">
-            <span class="float-label__label__bg" v-if="formElemType === 'textarea'"></span> 
-            <span class="float-label__label__text">{{ labelText }}</span>
-        </label>
+        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId"><span class="float-label__label__bg" v-if="formElemType === 'textarea'"></span> <span class="float-label__label__text">{{ labelText }}</span></label>
     </div>
 </template>
 
@@ -20,13 +17,14 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     let formElemId = ref('')
     let formElemType = ref('')
     let formElemHasContent = ref(false)
-    let isValidFormElem = ref(false)
+    let isUsableFormElem = ref(false)
+    let shouldWatchElem = ref(false)
     
     const compatibleFloatElemsQuery = '[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select'
 
     const props = defineProps({
         label: {type: String, default: ''},
-        float: {type: Boolean},
+        float: {type: Boolean, default: null},
         onFocus: {type: Boolean, default: false}
     })
 
@@ -42,13 +40,13 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         }
     })
     const isFloated = computed(()=>{
-        let float = false
+        let shouldFloat = false
         if( props.float ) {
-            float = true
+            shouldFloat = true
         } else {
-            float = formElemHasContent.value && formElemHasContent.value !== '0'
+            shouldFloat = formElemHasContent.value && formElemHasContent.value !== '0'
         }
-        return float
+        return shouldFloat
     })
     const getLabelText = () => {
         labelText.value = labelComputed.value ? props.label : placeholderText.value
@@ -80,7 +78,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
         }
     }
     // Watch for form element input
-    const watchForFormChanges = () => {
+    const setUpWatchForFormChanges = () => {
         if(formElemType.value === 'select') {
             formElem.value.addEventListener('change', updateIsFloatedOnChange)
         } else {
@@ -105,23 +103,26 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     
     onMounted(() => {
         formElem.value = root.value.querySelector(compatibleFloatElemsQuery)
-        isValidFormElem.value = formElem.value ? true : false;
-        if( isValidFormElem.value ) {
+        isUsableFormElem.value = formElem.value ? true : false;
+        shouldWatchElem.value = props.float === null ? true : false;
+        if( isUsableFormElem.value ) {
             formElemId.value = getFormElemId()
             formElemType.value = formElem.value ? formElem.value.tagName.toLowerCase() : ''
             formElemHasContent.value = formElem.value.value ? true : false
             placeholderText.value = getPlaceholderValue()
             setMatchingIds()
-            setTimeout(() => {
-                watchForFormChanges()
-            }, 200);
+            if(shouldWatchElem.value === true) {
+                setTimeout(() => {
+                    setUpWatchForFormChanges()
+                }, 200);
+            }
         } else {
             placeholderText.value = ''
         }
         getLabelText()
     })
     onBeforeUnmount(() => {
-        if(isValidFormElem.value) {
+        if(isUsableFormElem.value) {
             destroyWatchers()
         }
     })
