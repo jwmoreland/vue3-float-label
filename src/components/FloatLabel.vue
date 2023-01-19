@@ -1,8 +1,11 @@
 <template>
     <div class="float-label" :class="{'float-label--fade-anim' : shouldFade, 'float-label--on-focus' : props.onFocus, 'float-label--fixed' : isFloated}" ref="root">
         <slot></slot>
-        <div v-if="formElemType === ''" class="float-label__label float-label--no-click">{{ labelText}}</div>
-        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId"><span class="float-label__label__bg" v-if="formElemType === 'textarea'"></span> <span class="float-label__label__text">{{ labelText }}</span></label>
+        <div v-if="formElemType === ''" class="float-label__label float-label--no-click"><span class="float-label__label__text">{{ labelText }}</span></div>
+        <label v-else class="float-label__label" :class="{'float-label--no-click': formElemType === 'select'}" :for="formElemId">
+            <span class="float-label__label__bg" v-if="formElemType === 'textarea'"></span> 
+            <span class="float-label__label__text">{{ labelText }}</span>
+        </label>
     </div>
 </template>
 

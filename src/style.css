@@ -1,10 +1,9 @@
 :root {
     --vfl-padding-y: 16px;
     --vfl-padding-x: 16px;
-    --border-width: 1px;
-    --outline-width-focus: 2px;
+    --vfl-label-color: #6c6c6c;
     --border-color: lightgray;
-    --outline-color-focus: #80b4d3;
+    --border-width: 1px;
 }
 .float-label {
     display: flex;
@@ -24,9 +23,7 @@
     opacity: 0;
     transition: opacity 0.3s;
 }
-textarea:focus ~ .float-label__label .float-label__label__bg {
-    top:2px;
-}
+
 .float-label__label__text {
     transition: all .2s;
     opacity: 1;
@@ -45,7 +42,7 @@ textarea:focus ~ .float-label__label .float-label__label__bg {
     margin-bottom: 6px;
 }
 .float-label input:focus, .float-label textarea:focus, .float-label select:focus {
-    outline: var(--outline-width-focus) solid var(--outline-color-focus);
+    outline: 2px solid #80b4d3;
 }
 
 .float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label__label__text {
@@ -54,7 +51,7 @@ textarea:focus ~ .float-label__label .float-label__label__bg {
     left: var(--vfl-padding-x);
     display: block;
     line-height: 24px;
-    font-weight: 400;
+    color: var(--vfl-label-color);
 }
 .float-label input::placeholder, .float-label textarea::placeholder {
     color: transparent;
@@ -63,13 +60,13 @@ textarea:focus ~ .float-label__label .float-label__label__bg {
 .float-label--fade-anim input::placeholder, .float-label--fade-anim textarea::placeholder {
     color: gray;
 }
-.float-label--fixed .float-label__label__text, .float-label--on-focus input:focus ~ .float-label__label .float-label__label .float-label__label__text {
+.float-label--fixed .float-label__label__text, .float-label--on-focus input:focus ~ .float-label__label .float-label__label__text {
     transform-origin: top left;
     transform: scale(.85) translateY(-18px);
     opacity: 1;
     pointer-events: none;
 }
-.float-label--fixed input::placeholder, .float-label--fixed textarea::placeholder {
+.float-label--fixed input::placeholder, .float-label--fixed textarea::placeholder, .float-label--on-focus input:focus::placeholder {
     opacity: 0;
 }
 .float-label--fixed .float-label__label__bg {

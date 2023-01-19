@@ -1,7 +1,58 @@
-# Vue 3 + Vite
+# Vue 3 Float Label
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Float Label like package for Vue 3. Written in Composition API and easily customizable with CSS.
 
-## Recommended IDE Setup
+![Animation intro showing Vue 3 Float Label in action](src/demo.gif)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+```html
+<float-label>
+  <input type="text" placeholder="Label">
+</float-label>
+```
+
+## Installation
+```sh
+$ npm install vue3-float-label
+```
+
+### Global
+Load plugin in your main js file:
+
+```js
+import FloatLabel from 'vue3-float-label'
+import "vue3-float-label/dist/style.css"
+```
+
+### Local
+
+## Usage
+
+
+### Props
+<hr>
+
+#### `label` 
+
+**String** - If you want a different label than the placeholder text. You can also pass it dynamic text based on another value (i.e. `'Start time on ' + beginningDate` )
+
+Example:
+```html
+<float-label :label="'Your Name'">
+    <input type="text" placeholder="Enter your name">
+</float-label>
+```
+<hr>
+
+#### `float` 
+
+**Boolean** - Use this to manually control when the label is floated. This disables all other detection and `on-focus` prop.
+
+```html
+<float-label :float="name ? true : false">
+    <input v-model="name" type="text" placeholder="Enter your name">
+</float-label>
+```
+<hr>
+#### `on-focus`
+
+**Boolean** - Optional behavior that triggers the float when the field is in focus instead of when content is typed
