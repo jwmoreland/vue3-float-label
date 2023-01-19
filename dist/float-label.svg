@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>float-label</title>
+    <g id="float-label" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#979797" stroke-width="4" fill="#FFFFFF" x="2" y="2" width="124" height="124" rx="8"></rect>
+        <text id="label" font-family="OpenSans-Semibold, Open Sans" font-size="33.8253887" font-weight="500" fill="#4885FF">
+            <tspan x="12" y="39">label</tspan>
+        </text>
+        <text id="Text" font-family="OpenSans-Semibold, Open Sans" font-size="50.738083" font-weight="500" fill="#000000">
+            <tspan x="12" y="93">Text</tspan>
+        </text>
+    </g>
+</svg>
