@@ -62,6 +62,21 @@ Example:
 
 **Boolean** - Optional behavior that triggers the float when the field is in focus instead of when content is typed
 
+## Customizing Styles
+
+The `vue3-float-label` component uses CSS variables to allow easy customization of its appearance. You can either copy the styles and modify them yourself, or there are some variables you can override. Below are the default CSS variables defined in the component that you can override in your stylesheet:
+
+```css
+:root {
+    --vfl-padding-y: 17px;
+    --vfl-padding-x: 16px;
+    --vfl-label-color: #6c6c6c;
+    --border-color: lightgray;
+    --border-width: 1px;
+}
+```
+
+
 ## License
 
 This project is licensed under the MIT License.
