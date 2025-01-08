@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.3",
   "type": "module",
-  "author" : "Justin Moreland",
+  "author": "Justin Moreland",
   "license": "MIT",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue3-float-label.umd.cjs",
   "module": "./dist/vue3-float-label.js",
   "exports": {
@@ -22,10 +24,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "vue": "^3.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.3",
-    "vite": "^3.0.7"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.7"
   }
 }

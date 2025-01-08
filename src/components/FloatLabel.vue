@@ -9,6 +9,12 @@
 <script setup>
 import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
 
+    const props = defineProps({
+        label: {type: String, default: ''},
+        float: {type: Boolean, default: null},
+        onFocus: {type: Boolean, default: false}
+    })
+
     let root = ref(null)
     let labelText = ref('')
     let placeholderText = ref('')
@@ -22,11 +28,6 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     
     const compatibleFloatElemsQuery = '[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select'
 
-    const props = defineProps({
-        label: {type: String, default: ''},
-        float: {type: Boolean, default: null},
-        onFocus: {type: Boolean, default: false}
-    })
 
     const labelComputed = computed(()=>{
         return props.label
