@@ -1,0 +1,36 @@
+# Ignore development directories
+node_modules/
+dist-ssr/
+
+# Ignore log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Ignore local environment and build files
+*.local
+.DS_Store
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore tests and documentation (if not needed for the package)
+test/
+tests/
+__tests__/
+*.spec.js
+*.test.js
+docs/
+
+# Exclude anything that isn’t required for the package to run
+*.env
