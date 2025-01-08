@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -6,18 +5,13 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, './src/main.js'),
-      name: 'vue3-float-label',
-      // the proper extensions will be added
-      fileName: 'vue3-float-label',
+      entry: 'src/components/FloatLabel.vue',
+      name: 'Vue3FloatLabel',
+      fileName: (format) => `vue3-float-label.${format}.js`
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ['vue'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
           vue: 'Vue'
         }

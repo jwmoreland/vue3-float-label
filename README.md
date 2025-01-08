@@ -11,23 +11,28 @@ Float Label like package for Vue 3. Written in Composition API and easily custom
 ```
 
 ## Installation
+
+Install the package via npm:
 ```sh
 $ npm install vue3-float-label
 ```
 
-### Global
-Load plugin in your main js file:
-
-```js
-import FloatLabel from 'vue3-float-label'
-import "vue3-float-label/dist/style.css"
-```
-
-### Local
-
 ## Usage
 
+To use the component locally within a single component:
 
+```html
+<template>
+  <FloatLabel label="Your Name">
+    <input type="text" placeholder="Enter your name" />
+  </FloatLabel>
+</template>
+
+<script setup>
+import { FloatLabel } from 'vue3-float-label';
+import 'vue3-float-label/dist/style.css'; // Import the stylesheet
+</script>
+```
 ### Props
 <hr>
 
@@ -56,3 +61,7 @@ Example:
 #### `on-focus`
 
 **Boolean** - Optional behavior that triggers the float when the field is in focus instead of when content is typed
+
+## License
+
+This project is licensed under the MIT License.
