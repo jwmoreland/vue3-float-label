@@ -18,7 +18,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     let root = ref(null)
     let labelText = ref('')
     let placeholderText = ref('')
-    let labelRef = ref(props.label)
+    let labelRef = ref(null)
     let formElem = ref({})
     let formElemId = ref('')
     let formElemType = ref('')
@@ -103,6 +103,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from 'vue'
     })
     
     onMounted(() => {
+        labelRef.value = props.label
         formElem.value = root.value.querySelector(compatibleFloatElemsQuery)
         isUsableFormElem.value = formElem.value ? true : false;
         shouldWatchElem.value = props.float === null ? true : false;

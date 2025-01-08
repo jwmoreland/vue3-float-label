@@ -1,5 +1,5 @@
 :root {
-    --vfl-padding-y: 16px;
+    --vfl-padding-y: 17px;
     --vfl-padding-x: 16px;
     --vfl-label-color: #6c6c6c;
     --border-color: lightgray;
@@ -16,7 +16,7 @@
     display: block;
     pointer-events: none;
     position: absolute;
-    top: 1px;
+    top: 2px;
     right: calc(var(--vfl-padding-x) - 2px);
     left: calc(var(--vfl-padding-x) - 2px);
     height: 26px;
@@ -40,9 +40,18 @@
     line-height: 20px;
     border: var(--border-width) solid var(--border-color);
     margin-bottom: 6px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.float-label select {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") right 16px top 22px no-repeat;
 }
 .float-label input:focus, .float-label textarea:focus, .float-label select:focus {
     outline: 2px solid #80b4d3;
+}
+
+.float-label select { 
+    background-position: top 7px right -3px;
 }
 
 .float-label input::placeholder, .float-label > textarea::placeholder, .float-label select::placeholder, .float-label__label__text {

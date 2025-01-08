@@ -1,11 +1,11 @@
-import { ref as t, computed as m, watch as U, onMounted as I, onBeforeUnmount as N, openBlock as f, createElementBlock as v, normalizeClass as g, renderSlot as M, unref as u, createElementVNode as x, toDisplayString as E, createCommentVNode as W, createTextVNode as q } from "vue";
-const A = {
+import { ref as t, computed as m, watch as I, onMounted as N, onBeforeUnmount as M, openBlock as v, createElementBlock as d, normalizeClass as g, renderSlot as W, unref as u, createElementVNode as x, toDisplayString as E, createCommentVNode as q, createTextVNode as A } from "vue";
+const H = {
   key: 0,
   class: "float-label__label float-label--no-click"
-}, H = { class: "float-label__label__text" }, z = ["for"], D = {
+}, R = { class: "float-label__label__text" }, z = ["for"], D = {
   key: 0,
   class: "float-label__label__bg"
-}, O = { class: "float-label__label__text" }, P = "[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select", R = {
+}, O = { class: "float-label__label__text" }, P = "[type=date], [type=datetime-local], [type=datetime], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], textarea, select", $ = {
   __name: "FloatLabel",
   props: {
     label: { type: String, default: "" },
@@ -14,15 +14,13 @@ const A = {
   },
   setup(F) {
     const s = F;
-    let b = t(null), c = t(""), r = t("");
-    t(s.label);
-    let e = t({}), n = t(""), a = t(""), i = t(!1), p = t(!1), _ = t(!1);
-    const y = m(() => s.label), k = m(() => a.value === "select" ? !0 : r.value && c.value !== r.value), L = m(() => {
+    let b = t(null), c = t(""), r = t(""), k = t(null), e = t({}), n = t(""), a = t(""), i = t(!1), p = t(!1), _ = t(!1);
+    const y = m(() => s.label), L = m(() => a.value === "select" ? !0 : r.value && c.value !== r.value), w = m(() => {
       let l = !1;
       return s.float ? l = !0 : l = i.value && i.value !== "0", l;
     }), h = () => {
       c.value = y.value ? s.label : r.value;
-    }, w = () => e.value.getAttribute("id"), C = () => ("10000000-1000-4000-8000" + -1e11).replace(/[018]/g, (o) => (o ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> o / 4).toString(16)), T = () => {
+    }, C = () => e.value.getAttribute("id"), T = () => ("10000000-1000-4000-8000" + -1e11).replace(/[018]/g, (o) => (o ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> o / 4).toString(16)), V = () => {
       switch (a.value) {
         case "input":
         case "textarea":
@@ -33,43 +31,43 @@ const A = {
         default:
           return "";
       }
-    }, V = () => {
-      n.value || (n.value = C(), e.value.id = n.value);
     }, S = () => {
-      a.value === "select" ? e.value.addEventListener("change", d) : e.value.addEventListener("input", d);
+      n.value || (n.value = T(), e.value.id = n.value);
     }, B = () => {
-      a.value === "select" ? e.value.removeEventListener("change", d) : e.value.removeEventListener("input", d);
-    }, d = (l) => {
+      a.value === "select" ? e.value.addEventListener("change", f) : e.value.addEventListener("input", f);
+    }, U = () => {
+      a.value === "select" ? e.value.removeEventListener("change", f) : e.value.removeEventListener("input", f);
+    }, f = (l) => {
       i.value = l.target.value.length > 0;
     };
-    return U(y, (l, o) => {
+    return I(y, (l, o) => {
       h();
-    }), I(() => {
-      e.value = b.value.querySelector(P), p.value = !!e.value, _.value = s.float === null, p.value ? (n.value = w(), a.value = e.value ? e.value.tagName.toLowerCase() : "", i.value = !!e.value.value, r.value = T(), V(), _.value === !0 && setTimeout(() => {
-        S();
-      }, 200)) : r.value = "", h();
     }), N(() => {
-      p.value && B();
-    }), (l, o) => (f(), v("div", {
-      class: g(["float-label", { "float-label--fade-anim": k.value, "float-label--on-focus": s.onFocus, "float-label--fixed": L.value }]),
+      k.value = s.label, e.value = b.value.querySelector(P), p.value = !!e.value, _.value = s.float === null, p.value ? (n.value = C(), a.value = e.value ? e.value.tagName.toLowerCase() : "", i.value = !!e.value.value, r.value = V(), S(), _.value === !0 && setTimeout(() => {
+        B();
+      }, 200)) : r.value = "", h();
+    }), M(() => {
+      p.value && U();
+    }), (l, o) => (v(), d("div", {
+      class: g(["float-label", { "float-label--fade-anim": L.value, "float-label--on-focus": s.onFocus, "float-label--fixed": w.value }]),
       ref_key: "root",
       ref: b
     }, [
-      M(l.$slots, "default"),
-      u(a) === "" ? (f(), v("div", A, [
-        x("span", H, E(u(c)), 1)
-      ])) : (f(), v("label", {
+      W(l.$slots, "default"),
+      u(a) === "" ? (v(), d("div", H, [
+        x("span", R, E(u(c)), 1)
+      ])) : (v(), d("label", {
         key: 1,
         class: g(["float-label__label", { "float-label--no-click": u(a) === "select" }]),
         for: u(n)
       }, [
-        u(a) === "textarea" ? (f(), v("span", D)) : W("", !0),
-        o[0] || (o[0] = q()),
+        u(a) === "textarea" ? (v(), d("span", D)) : q("", !0),
+        o[0] || (o[0] = A()),
         x("span", O, E(u(c)), 1)
       ], 10, z))
     ], 2));
   }
 };
 export {
-  R as default
+  $ as FloatLabel
 };

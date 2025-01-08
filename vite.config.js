@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/components/FloatLabel.vue',
+      entry: 'src/index.js',
       name: 'Vue3FloatLabel',
       fileName: (format) => `vue3-float-label.${format}.js`
     },
