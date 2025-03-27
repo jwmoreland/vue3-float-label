@@ -58,6 +58,7 @@ Example:
 </float-label>
 ```
 <hr>
+
 #### `on-focus`
 
 **Boolean** - Optional behavior that triggers the float when the field is in focus instead of when content is typed
