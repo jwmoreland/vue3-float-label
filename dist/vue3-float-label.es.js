@@ -1,4 +1,4 @@
-import { ref as t, computed as m, watch as I, onMounted as N, onBeforeUnmount as M, openBlock as v, createElementBlock as d, normalizeClass as g, renderSlot as W, unref as u, createElementVNode as x, toDisplayString as E, createCommentVNode as q, createTextVNode as A } from "vue";
+import { ref as t, computed as m, watch as I, onMounted as N, onBeforeUnmount as M, createElementBlock as v, openBlock as d, normalizeClass as g, renderSlot as W, unref as u, createElementVNode as x, toDisplayString as E, createCommentVNode as q, createTextVNode as A } from "vue";
 const H = {
   key: 0,
   class: "float-label__label float-label--no-click"
@@ -48,20 +48,20 @@ const H = {
       }, 200)) : r.value = "", h();
     }), M(() => {
       p.value && U();
-    }), (l, o) => (v(), d("div", {
+    }), (l, o) => (d(), v("div", {
       class: g(["float-label", { "float-label--fade-anim": L.value, "float-label--on-focus": s.onFocus, "float-label--fixed": w.value }]),
       ref_key: "root",
       ref: b
     }, [
       W(l.$slots, "default"),
-      u(a) === "" ? (v(), d("div", H, [
+      u(a) === "" ? (d(), v("div", H, [
         x("span", R, E(u(c)), 1)
-      ])) : (v(), d("label", {
+      ])) : (d(), v("label", {
         key: 1,
         class: g(["float-label__label", { "float-label--no-click": u(a) === "select" }]),
         for: u(n)
       }, [
-        u(a) === "textarea" ? (v(), d("span", D)) : q("", !0),
+        u(a) === "textarea" ? (d(), v("span", D)) : q("", !0),
         o[0] || (o[0] = A()),
         x("span", O, E(u(c)), 1)
       ], 10, z))
