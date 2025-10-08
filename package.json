@@ -1,6 +1,6 @@
 {
   "name": "vue3-float-label",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Vue 3 component for float labels.",
   "type": "module",
   "author": "Justin Moreland",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "esbuild": "^0.25.0",
-    "vite": "^6.2.6"
+    "vite": "^6.2.7"
   },
   "peerDependencies": {
     "vue": "^3.5.13"
