@@ -1,5 +1,5 @@
 import { computed as e, createCommentVNode as t, createElementBlock as n, createElementVNode as r, createTextVNode as i, normalizeClass as a, onBeforeUnmount as o, onMounted as s, openBlock as c, ref as l, renderSlot as u, toDisplayString as d, unref as f, watch as p } from "vue";
-//#region src/components/FloatLabel.vue
+// src/components/FloatLabel.vue
 var m = {
 	key: 0,
 	class: "float-label__label float-label--no-click"
@@ -23,12 +23,12 @@ var m = {
 		}
 	},
 	setup(b) {
-		let x = b, S = l(null), C = l(""), w = l(""), T = l(null), E = l({}), D = l(""), O = l(""), k = l(!1), A = l(!1), j = l(!1), M = e(() => x.label), N = e(() => O.value === "select" ? !0 : w.value && C.value !== w.value), P = e(() => {
+		let x = b, S = l(null), C = l(""), w = l(""), T = l(null), E = l({}), D = l(""), O = l(""), k = l(!1), A = l(!1), j = l(!1), M = e(() => x.label), N = e(() => O.value === "select" || w.value && C.value !== w.value), P = e(() => {
 			let e = !1;
 			return e = x.float ? !0 : k.value && k.value !== "0", e;
 		}), F = () => {
 			C.value = M.value ? x.label : w.value;
-		}, I = () => E.value.getAttribute("id"), L = () => "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (e) => (e ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> e / 4).toString(16)), R = () => {
+		}, I = () => E.value.getAttribute("id"), L = () => "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (e) => (e ^ crypto.getRandomValues(/* @__PURE__ */ new Uint8Array(1))[0] & 15 >> e / 4).toString(16)), R = () => {
 			switch (O.value) {
 				case "input":
 				case "textarea": return E.value.placeholder;
@@ -73,5 +73,4 @@ var m = {
 		], 10, g))], 2));
 	}
 };
-//#endregion
 export { b as FloatLabel };
